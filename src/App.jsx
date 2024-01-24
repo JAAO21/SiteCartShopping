@@ -1,27 +1,28 @@
 
-import './App.css'
 
+import './App.css'
+import Loading from './components/Loading/index.jsx'
 import { UseProducts } from './hooks/useProducts'
+
 function App() {
   const { data, loading } = UseProducts();
-  if (loading) return <p>Loading ...</p>
+
+  if (loading) return <Loading />
+
 
   return (
-    <>
-      <div>
-        {
-          data.map((d,index) => (
-            <div key={index}> 
-              <h1>{d.id}</h1>
-              <p>{d.price}</p>
-              <h1>{d.price}</h1>
-              <p>{d.image}</p>
-            </div>
-          ))
-        }
-      </div>
+    data.map((d, index) => (
+      <div key={index}>
 
-    </>
+        <p>{d.price}</p>
+        <h1>{d.price}</h1>
+        <p>{d.image}</p>
+      </div>
+    ))
+
+
+
+
   )
 }
 

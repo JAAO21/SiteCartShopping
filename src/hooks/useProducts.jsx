@@ -1,6 +1,10 @@
+
 import ProductApi from '../services/fakeStore.api'
-import { useEffect, useState } from 'react';
+
 import {useLoading} from './useLoading'
+
+import { useEffect, useState } from 'react';
+
 export  const UseProducts = () => {
   let [data, setData] = useState([{}]);
   let {loading,setLoading}=useLoading();
