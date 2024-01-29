@@ -24,5 +24,5 @@ export  const UseProducts = () => {
       fecthData()
   }, [setData,setLoading])
 
-  return {data,loading};
+  return {data,loading,setData};
 }

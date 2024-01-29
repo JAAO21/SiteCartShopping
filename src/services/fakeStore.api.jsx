@@ -1,8 +1,12 @@
 const url = 'https://fakestoreapi.com/products'
 
-export default async function Api() {
+export default async function Api(params) {
   try {
-    const response = await fetch(url);
+    let response;
+    if (params != undefined) { response = await fetch(`${url}/${params}`); } else {
+      response = await fetch(url);
+    }
+
 
     if (!response.ok) throw new Error(`Error :${response.status}`)
     const json = await response.json();
