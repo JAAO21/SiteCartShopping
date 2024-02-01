@@ -6,11 +6,12 @@ import { UseProducts } from './hooks/useProducts'
 
 import Loading from './components/Loading/index.jsx'
 import FilterCategories from './components/FilterCategories/index.jsx'
+import FilterPrices from './components/FilterPrices/index.jsx';
 
 import './App.css'
 
 function App() {
-  const { data, loading,setData } = UseProducts();
+  const { data, loading, setData } = UseProducts();
   const [dataInput, setDataInput] = useState('')
   if (loading) return <Loading />
 
@@ -26,7 +27,7 @@ function App() {
     setDataInput(e.target.value)
   }
 
-  
+
   return (
     <div>
 
@@ -38,16 +39,10 @@ function App() {
         </form>
       </div>
       <h1> Filtro de categorias </h1>
-      <FilterCategories setData={setData}/>
-     {/*  <h1>Filtro de precios</h1>
-      {<div>
-        {
-          data.map((d,index) => (
-            <div key={index}>{d.price} </div>
-          ))
-        }</div>} */}
+      <FilterCategories setData={setData} />
+      <h1>Filtro de precios</h1>
+      <FilterPrices setData={setData} />
       {
-
         data.map((d, index) => (
           <div key={index} style={{ display: 'flex', border: '1px solid black', flexDirection: 'column' }}>
             <h1>{d.title}</h1>

@@ -12,7 +12,7 @@ const FilterCategories = ({ setData }) => {
 
 
     return <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>{dataCategory?.map((data, index) => (
-        <div style={{ border: '1px solid black', margin: '5px' }} onClick={handleCategory} key={index}><p>{data}</p></div>
+        <div style={{ border: '1px solid black', margin: '5px' }} onClick={handleCategory} key={index}><label>{data}</label></div>
     ))}</div>
 }
 
