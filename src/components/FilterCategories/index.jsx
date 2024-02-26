@@ -1,21 +1,41 @@
-import { useEffect, useState } from 'react';
-import Api from '../../services/fakeStore.api'
-const FilterCategories = ({ setData }) => {
-    const [dataCategory, setDataCategory] = useState([]);
-    useEffect(() => {
-        Api('categories').then(data => setDataCategory(data))
-    }, [setDataCategory])
+import { useProducts } from "../../hooks/useProducts.jsx";
+import { functionFilters } from "../../Functions/FunctionFilters/index.jsx";
 
-    const handleCategory = (e) => {
-        Api(`category/${e.target.textContent}`).then(d => setData(d))
-    }
-
-
-    return <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>{dataCategory?.map((data, index) => (
-        <div style={{ border: '1px solid black', margin: '5px' }} onClick={handleCategory} key={index}><label>{data}</label></div>
-    ))}</div>
-}
-
-
+const FilterCategories = ({
+  dataProducts,
+  setDataProducts,
+  productsOriginal,
+}) => {
+  const { products } = useProducts("categories");
+  const handleCategory = (e) => {
+    const textContent = e.target.textContent;
+    const dataFilter = functionFilters(
+      dataProducts,
+      "Categories",
+      textContent,
+      productsOriginal
+    ); //obtiene los productos por categoria
+    setDataProducts(dataFilter);
+  };
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+      }}
+    >
+      {products?.map((data, index) => (
+        <div
+          style={{margin: "5px" }}
+          onClick={handleCategory}
+          key={index}
+        >
+          <p style={{fontFamily:"cursive", fontSize:"20px",fontStyle:"oblique"}}>{data}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default FilterCategories;

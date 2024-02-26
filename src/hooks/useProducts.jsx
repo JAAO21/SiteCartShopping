@@ -1,28 +1,30 @@
+import { useEffect, useState } from "react";
 
-import ProductApi from '../services/fakeStore.api'
+import { useLoading } from "./useLoading";
 
-import {useLoading} from './useLoading'
+import ProductApi from "../services/fakeStore.api";
 
-import { useEffect, useState } from 'react';
-
-export  const UseProducts = () => {
-  let [data, setData] = useState([{}]);
-  let {loading,setLoading}=useLoading();
-   useEffect(() => {
-    
-    const fecthData=async()=>{
-      try{
-        setLoading(true)
-        const result= await ProductApi();
-        setData(result!= undefined ? result : [{ status: '404', message: 'Data not found' }]);
-        setLoading(false)
-      }catch(error){
-        console.error(`Error: ${error.message}`)
-        setLoading(true)
+export const useProducts = (params) => {
+  const [products, setProducts] = useState([]);
+  const { loading, setLoading } = useLoading();
+  const [copyData, setCopyData] = useState([]);
+  //manejar estado de errores
+  useEffect(() => {
+    const fecthData = async () => {
+      try {
+        setLoading(true);
+        const result =
+          params != "undefined" ? await ProductApi(params) : await ProductApi();
+        setProducts(result != undefined ? result : []);
+        setCopyData(result !== undefined ? [...result] : []);
+        setLoading(false);
+      } catch (error) {
+        console.error(`Error: ${error.message}`);
+        setLoading(true);
       }
-    }
-      fecthData()
-  }, [setData,setLoading])
+    };
+    fecthData();
+  }, [setProducts, setLoading]);
 
-  return {data,loading,setData};
-}
+  return { products, loading, setProducts,copyData,setCopyData };
+};
