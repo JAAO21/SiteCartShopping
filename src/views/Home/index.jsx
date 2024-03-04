@@ -1,5 +1,5 @@
-import { useProducts } from "../../hooks/useProducts.jsx";
 import { useNavigate   } from "react-router-dom";
+import { useProducts } from "../../hooks/useProducts.jsx";
 
 import { useShoppingCart } from "../../hooks//useShoppingCart.jsx";
 
